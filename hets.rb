@@ -12,6 +12,7 @@ class Hets < Formula
   homepage "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm"
   url "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/intel-mac/dmgs/#{@@dmg_file}"
 
+  # Options
   option 'with-nightly', 'uses nightly version of the binary'
 
   depends_on :x11
@@ -25,6 +26,10 @@ class Hets < Formula
     system("hdiutil attach -quiet #{@@dmg_file}")
 
     system("cp -r #{dmg_content}/Hets.app #{app_dir}")
+
+    # install hets in bin as script which sets according
+    # environment variables
+    # (taken and adjusted from script file in hets root dir)
     bin.mkdir
     bin.join("hets").open('w') do |f|
       f.write <<-BASH
@@ -41,7 +46,8 @@ export PELLET_PATH=#{hets_dir}/pellet
 
     system("hdiutil detach -quiet #{dmg_content}")
 
-    if build.with? 'nightly' || build.head?
+    # automatically install latest nightly build
+    if build.with? 'nightly'
       system("curl -O #{@@nightly_url}")
       system("bunzip2 hets.bz2")
       system("mv hets #{binary}")
