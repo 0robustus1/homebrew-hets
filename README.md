@@ -17,3 +17,10 @@ In order to use this tap you'll need to perform some basic command-line tasks:
 Installing hets will fetch the most recent version of hets known to this
 formula, but adding the `--with-nightly` switch will also fetch the
 most recent nightly build (always) and update your hets-binary with it.
+
+We also have the `hets-update` script which will allow you to manually update the hets binary
+to the latest nightly build. It will be installed by either providing the `--with-nightly`
+or the `--with-updater` switch.
+
+[1]: http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm
+[2]: https://github.com/ontohub/ontohub
