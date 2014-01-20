@@ -13,7 +13,8 @@ class Hets < Formula
   url "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/intel-mac/dmgs/#{@@dmg_file}"
 
   # Options
-  option 'with-nightly', 'uses nightly version of the binary'
+  option 'with-nightly', 'uses nightly version of the binary, also includes hets-update'
+  option 'with-updater', 'installs the updater script but does not run it'
 
   depends_on :x11
 
@@ -52,6 +53,19 @@ export PELLET_PATH=#{hets_dir}/pellet
       system("bunzip2 hets.bz2")
       system("mv hets #{binary}")
       system("chmod +x #{binary}")
+    end
+
+    # hets updater script to manually fetch latest nightly build
+    if build.with?('nightly') || build.with?('updater')
+      bin.join("hets-update").open('w') do |f|
+        f.write <<-BASH
+#!/bin/bash
+curl -o /tmp/hets.bz2 #{@@nightly_url}
+bunzip2 /tmp/hets.bz2
+mv /tmp/hets #{binary}
+chmod +x #{binary}
+        BASH
+      end
     end
 
   end
