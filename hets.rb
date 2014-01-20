@@ -70,4 +70,20 @@ chmod +x #{binary}
 
   end
 
+  def caveats
+    the_caveats = ''
+    if build.with? 'nightly'
+      the_caveats += <<-EOS.undent
+        We've updated your hets binary to the latest nightly version.
+      EOS
+    end
+    if build.with?('nightly') || build.with?('updater')
+      the_caveats += <<-EOS.undent
+        We've also installed the `hets-update` script into your PATH
+        which will fetch you the latest nightly hets binary.
+      EOS
+    end
+    return the_caveats
+  end
+
 end
