@@ -60,10 +60,13 @@ export PELLET_PATH=#{hets_dir}/pellet
       bin.join("hets-update").open('w') do |f|
         f.write <<-BASH
 #!/bin/bash
-curl -o /tmp/hets.bz2 #{@@nightly_url}
+echo 'Downloading current nightly build of hets binary...'
+curl -q -o /tmp/hets.bz2 #{@@nightly_url}
 bunzip2 /tmp/hets.bz2
+echo -n 'Installing file...'
 mv /tmp/hets #{binary}
 chmod +x #{binary}
+echo 'done'
         BASH
       end
     end
