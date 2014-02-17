@@ -9,6 +9,7 @@ class Hets < Formula
 
   depends_on :x11
   depends_on 'hets_dependencies'
+  depends_on 'hets-lib'
   depends_on 'pellet'
   depends_on 'uDrawGraph'
 
@@ -44,7 +45,7 @@ class Hets < Formula
       bin.join("hets").open('w') do |f|
         f.write <<-BASH
 #!/bin/bash
-export HETS_LIB=#{hets_dir}/Hets-lib
+export HETS_LIB=/usr/local/opt/hets-lib
 export HETS_OWL_TOOLS=#{hets_dir}/hets-owl-tools
 export HETS_APROVE=$HETS_OWL_TOOLS/AProVE.jar
 export HETS_ONTODMU=$HETS_OWL_TOOLS/OntoDMU.jar
