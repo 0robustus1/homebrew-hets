@@ -1,6 +1,6 @@
 require "formula"
 
-class HetsBinary < Formula
+class Hets < Formula
   # Both the version and the sha1 need to be adjusted when a new
   # dmg-version of hets is released.
   version "2014-01-06"
