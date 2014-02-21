@@ -1,13 +1,14 @@
 require "formula"
+require 'rexml/document'
 
 class Hets < Formula
   # Both the version and the sha1 need to be adjusted when a new
   # dmg-version of hets is released.
-  revision = 18505
+  @@revision = 18505
   homepage "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm"
   head "https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/", :using => :svn
-  url "https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/", :using => :svn, :revision => revision
-  version "0.99-#{revision}"
+  url "https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/", :using => :svn, :revision => @@revision
+  version "0.99-#{@@revision}"
 
   depends_on :x11
   depends_on 'hets_dependencies'
@@ -21,6 +22,8 @@ class Hets < Formula
 
   def install
     # ENV['PATH'] = "~/.cabal/bin:/usr/local/opt/ghc/bin:/usr/local/opt/cabal-install/bin:/usr/local/opt/uDrawGraph/bin:#{ENV['PATH']}"
+
+    inject_version_to_makefile(build.head? ? nil : @@revision)
 
     puts 'Compiling hets...'
     system('make -j 1')
@@ -67,6 +70,23 @@ export PELLET_PATH=/usr/local/opt/pellet
       BASH
     end
     end
+  end
+
+  def inject_version_to_makefile(revision=nil)
+    revision ||= get_revision_number
+    FileUtils.cp 'Makefile', 'Makefile-stub-homebrew'
+    File.open('Makefile-stub-homebrew', 'r') do |fr|
+      File.open('Makefile', 'w') do |fw|
+        while(line = fr.gets) do
+          fw.write line.sub('$(shell svnversion .)', revision.to_s)
+        end
+      end
+    end
+  end
+
+  def get_revision_number
+    doc = REXML::Document.new(`svn log -l 1 https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk --with-no-revprops --xml`)
+    doc.elements.each('log/logentry'){}.first.attributes['revision']
   end
 
   def caveats
