@@ -21,7 +21,6 @@ class Hets < Formula
   option 'with-wrapper', 'install the wrapper script to actually run hets.'
 
   def install
-    # ENV['PATH'] = "~/.cabal/bin:/usr/local/opt/ghc/bin:/usr/local/opt/cabal-install/bin:/usr/local/opt/uDrawGraph/bin:#{ENV['PATH']}"
 
     inject_version_to_makefile(build.head? ? nil : @@revision)
 
