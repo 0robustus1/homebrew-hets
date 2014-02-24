@@ -11,7 +11,7 @@ class Hets < Formula
   version "0.99-#{@@revision}"
 
   depends_on :x11
-  depends_on 'hets_dependencies'
+  depends_on 'hets-dependencies'
   depends_on 'hets-lib'
   depends_on 'pellet'
   depends_on 'uDrawGraph'
