@@ -33,6 +33,21 @@ We currently supply hets in two different versions:
     `brew install hets --HEAD --with-wrapper`.
   - If you don't want or need the wrapper script, you can
     omit the `--with-wrapper` switch.
+  - The first time you're installing hets, you will get
+    a message like this:
+    ```
+    ==> Checking out https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/
+    Error validating server certificate for 'https://svn-agbkb.informatik.uni-bremen.de:443':
+    - The certificate is not issued by a trusted authority. Use the
+    fingerprint to validate the certificate manually!
+    Certificate information:
+    - Hostname: svn-agbkb.informatik.uni-bremen.de
+    - Valid: from Thu, 10 Sep 2009 10:50:11 GMT until Tue, 09 Sep 2014 10:50:11 GMT
+    - Issuer: Universitaet Bremen, Bremen, Bremen, DE
+    - Fingerprint: 6c:44:19:cf:52:29:ed:b0:11:9f:de:dc:01:c8:b4:25:30:25:21:a6
+    (R)eject, accept (t)emporarily or accept (p)ermanently? p
+    ```
+    You'll need to either accept temporarily or permanently the certificate. I suggest doing so permanently.
 
 #### Binary
 
