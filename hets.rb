@@ -4,7 +4,7 @@ require 'rexml/document'
 class Hets < Formula
   # Both the version and the sha1 need to be adjusted when a new
   # dmg-version of hets is released.
-  @@revision = 18518
+  @@revision = 18519
   homepage "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm"
   head "https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/", :using => :svn
   url "https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/", :using => :svn, :revision => @@revision
@@ -16,6 +16,8 @@ class Hets < Formula
   depends_on 'pellet'
   depends_on 'ant'
   depends_on 'uDrawGraph'
+  depends_on 'darwin'
+  depends_on 'spass'
 
   conflicts_with 'hets-binary'
 
