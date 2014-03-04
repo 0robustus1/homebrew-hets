@@ -12,10 +12,11 @@ class Udrawgraph < Formula
   sha1 '6b70847a47b2a042e03572302eb3f90831f86f60'
 
   def install
-    prefix.install Dir['*']
     inreplace 'bin/.uDrawGraph-wrapper' do |s|
-      s.sub! 'UDG_HOME=`dirname "$0"`/..', 'UDG_HOME=/usr/opt/local/udrawgraph/'
+      s.sub! 'UDG_HOME=`dirname "$0"`/..', 'UDG_HOME=/usr/local/opt/udrawgraph/'
     end
+    prefix.install Dir['*']
+    system("rm -f #{bin.join('wish')}")
   end
 
   def caveats
