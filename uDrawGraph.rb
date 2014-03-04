@@ -13,6 +13,9 @@ class Udrawgraph < Formula
 
   def install
     prefix.install Dir['*']
+    inreplace 'bin/.uDrawGraph-wrapper' do |s|
+      s.sub! 'UDG_HOME=`dirname "$0"`/..', 'UDG_HOME=/usr/opt/local/udrawgraph/'
+    end
   end
 
   def caveats
