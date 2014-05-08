@@ -35,6 +35,7 @@ We currently supply hets in two different versions:
     omit the `--with-wrapper` switch.
   - The first time you're installing hets, you will get
     a message like this:
+
     ```
     ==> Checking out https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/
     Error validating server certificate for 'https://svn-agbkb.informatik.uni-bremen.de:443':
@@ -47,7 +48,18 @@ We currently supply hets in two different versions:
     - Fingerprint: 6c:44:19:cf:52:29:ed:b0:11:9f:de:dc:01:c8:b4:25:30:25:21:a6
     (R)eject, accept (t)emporarily or accept (p)ermanently? p
     ```
+
     You'll need to either accept temporarily or permanently the certificate. I suggest doing so permanently.
+
+#### The HEAD
+
+If you have installed with the `--HEAD` option you will not get any messages about updated
+versions. You need to manually decide to upgrade.
+When you do so, you'll need to upgrade your hets version like this:
+
+```sh
+brew reinstall hets --HEAD
+```
 
 #### Binary
 
