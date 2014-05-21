@@ -12,9 +12,32 @@ class Pellet < Formula
   version "2.3.1"
   sha1 '7d46c04fdae8d8a15af07521c4cb033fd39385eb'
 
+  option 'with-script', 'includes a pellet script which is placed in PATH'
+
   def install
     system('ant')
     prefix.install Dir['dist/*']
+
+    if build.with? 'script'
+      bin.mkdir
+      bin.join('pellet').open('w') do |f|
+        f.write <<-SH
+#!/bin/sh
+
+if [ -n "${JAVA_HOME}" -a -x "${JAVA_HOME}/bin/java" ]; then
+  java="${JAVA_HOME}/bin/java"
+else
+  java=java
+fi
+
+if [ -z "${pellet_java_args}" ]; then
+  pellet_java_args="-Xmx512m"
+fi
+
+exec ${java} ${pellet_java_args} -jar #{prefix.join('lib/pellet-cli.jar')} "$@"
+        SH
+      end
+    end
   end
 
   def caveats
