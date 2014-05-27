@@ -2,9 +2,9 @@ require 'formula'
 
 class HetsDependencies < Formula
 
-  url "https://gist.github.com/0robustus1/9049050/raw/57625927b7f155611eb0dfe353c96128dce45fe7/install_cabal_hets_deps.sh"
+  url "https://gist.githubusercontent.com/0robustus1/9049050/raw/62b6f5a86b975e7c2db671c8c631643504d5f50e/install_cabal_hets_deps.sh"
   homepage 'https://gist.github.com/0robustus1/9049050'
-  sha1 'becccbe9553856203641bd18f054ecd0a3af7fcf'
+  sha1 'f44ba593fd804baf9b18a94a8499e57228258345'
 
   depends_on 'ghc'
   depends_on 'cabal-install'
