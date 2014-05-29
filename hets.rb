@@ -68,7 +68,7 @@ export HETS_OWL_TOOLS=/usr/local/opt/hets/lib/hets-owl-tools
 export HETS_APROVE=$HETS_OWL_TOOLS/AProVE.jar
 export HETS_ONTODMU=$HETS_OWL_TOOLS/OntoDMU.jar
 export PELLET_PATH=/usr/local/opt/pellet
-"/usr/local/opt/hets/bin/hets-bin" "$@"
+exec "/usr/local/opt/hets/bin/hets-bin" "$@"
       BASH
     end
     end
