@@ -4,11 +4,12 @@ require 'rexml/document'
 class Hets < Formula
   # Both the version and the sha1 need to be adjusted when a new
   # dmg-version of hets is released.
-  @@revision = 18565
+  @@version_commit = 'bc6c0d43924096cc980fd6ca9f0616879fa69c6f'
+  @@version_unix_timestamp = '1402678179'
   homepage "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm"
-  head "https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/", :using => :svn
-  url "https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk/", :using => :svn, :revision => @@revision
-  version "0.99-#{@@revision}"
+  head "https://github.com/spechub/Hets.git", :using => :git
+  url "https://github.com/spechub/Hets.git", :using => :git, :revision => @@version_commit
+  version "0.99-#{@@version_unix_timestamp}"
 
   depends_on :x11
   depends_on 'hets-dependencies'
@@ -25,7 +26,8 @@ class Hets < Formula
 
   def install
 
-    inject_version_to_makefile(build.head? ? nil : @@revision)
+    # inject_version_to_makefile(build.head? ? nil : @@revision)
+    inject_version_suffix
 
     puts 'Compiling hets...'
     system('make -j 1')
@@ -72,6 +74,20 @@ exec "/usr/local/opt/hets/bin/hets-bin" "$@"
       BASH
     end
     end
+  end
+
+  def version_suffix
+    if build.head?
+      version = nil
+      FileUtils.cd(cached_download) { version = `git log -1 --format=%ct`.to_i }
+      version
+    else
+      @@version_unix_timestamp.to_i
+    end
+  end
+
+  def inject_version_suffix
+    File.open('rev.txt', 'w') { |f| f << version_suffix }
   end
 
   def inject_version_to_makefile(revision=nil)
