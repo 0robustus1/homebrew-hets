@@ -26,7 +26,6 @@ class Hets < Formula
 
   def install
 
-    # inject_version_to_makefile(build.head? ? nil : @@revision)
     inject_version_suffix
 
     puts 'Compiling hets...'
@@ -88,23 +87,6 @@ exec "/usr/local/opt/hets/bin/hets-bin" "$@"
 
   def inject_version_suffix
     File.open('rev.txt', 'w') { |f| f << version_suffix }
-  end
-
-  def inject_version_to_makefile(revision=nil)
-    revision ||= get_revision_number
-    FileUtils.cp 'Makefile', 'Makefile-stub-homebrew'
-    File.open('Makefile-stub-homebrew', 'r') do |fr|
-      File.open('Makefile', 'w') do |fw|
-        while(line = fr.gets) do
-          fw.write line.sub('$(shell svnversion .)', revision.to_s)
-        end
-      end
-    end
-  end
-
-  def get_revision_number
-    doc = REXML::Document.new(`svn log -l 1 https://svn-agbkb.informatik.uni-bremen.de/Hets/trunk --with-no-revprops --xml`)
-    doc.elements.each('log/logentry'){}.first.attributes['revision']
   end
 
   def caveats
