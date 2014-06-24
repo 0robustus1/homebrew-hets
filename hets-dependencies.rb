@@ -7,7 +7,7 @@ class HetsDependencies < Formula
   url "https://gist.githubusercontent.com/0robustus1/9049050/raw/a9c8e0dcbefef624090b6d3bce279fd73c579598/install_cabal_hets_deps.sh"
   homepage 'https://gist.github.com/0robustus1/9049050'
   sha1 'cfa0ebdb51e6654ca3cea926b8e3106cda178de1'
-  version '0.1.0'
+  version '0.1.1'
 
   depends_on 'ghc'
   depends_on 'cabal-install'
@@ -31,8 +31,8 @@ class HetsDependencies < Formula
       hexpat
       uni-uDrawGraph
       parsec1
-      wai-extra
-      warp
+      wai-extra-2.1.0.1
+      warp-2.1.1.1
       tar
     }
     cabal_sandbox do
