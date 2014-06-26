@@ -18,7 +18,8 @@ class HetsDependencies < Formula
   depends_on 'fontconfig'
 
   def install
-    opts = ['--force-reinstalls', '--enable-documentation', '-p', '--global']
+    ghc_prefix = `ghc --print-libdir | sed -e 's+/lib.*/.*++g'`
+    opts = ['--force-reinstalls', '--enable-documentation', '-p', '--global', "--prefix=#{ghc_prefix}"]
     packages = %w{
       aterm
       random
@@ -36,11 +37,10 @@ class HetsDependencies < Formula
       http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/src-distribution/programatica-1.0.0.5.tar.gz
       tar
     }
-    cabal_sandbox do
-      cabal_install(*(opts + packages))
-      system('ghc-pkg hide parsec1')
-      system('ghc-pkg hide programatica')
-    end
+    system('cabal update')
+    cabal_install(*(opts + packages))
+    system('ghc-pkg hide parsec1')
+    system('ghc-pkg hide programatica')
   end
 
 end
