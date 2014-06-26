@@ -18,7 +18,7 @@ class HetsDependencies < Formula
   depends_on 'fontconfig'
 
   def install
-    ghc_prefix = `ghc --print-libdir | sed -e 's+/lib.*/.*++g'`
+    ghc_prefix = `ghc --print-libdir | sed -e 's+/lib.*/.*++g'`.strip
     opts = ['--force-reinstalls', '--enable-documentation', '-p', '--global', "--prefix=#{ghc_prefix}"]
     packages = %w{
       aterm
