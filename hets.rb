@@ -4,8 +4,8 @@ require 'rexml/document'
 class Hets < Formula
   # Both the version and the sha1 need to be adjusted when a new
   # dmg-version of hets is released.
-  @@version_commit = '23fcc53584407121682c0acf7aa446e7b69ecfdb'
-  @@version_unix_timestamp = '1406286707'
+  @@version_commit = 'affa1fc315048e0dd03ee5715fd22a171dee3ba5'
+  @@version_unix_timestamp = '1409043198'
   homepage "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm"
   head "https://github.com/spechub/Hets.git", :using => :git
   url "https://github.com/spechub/Hets.git", :using => :git, :revision => @@version_commit
@@ -55,6 +55,8 @@ class Hets < Formula
     owl_tools.join('lib').mkpath
     owl_tools.join('lib').install('OWL2/lib/owl2api-bin.jar')
 
+    local_lib.install('magic/hets.magic')
+
     if build.with? 'wrapper'
       puts 'Install the wrapper script'
       FileUtils.mv bin.join('hets').to_s, bin.join('hets-bin').to_s
@@ -65,6 +67,7 @@ class Hets < Formula
         f.write <<-BASH
 #!/bin/bash
 export HETS_LIB=/usr/local/opt/hets-lib
+export HETS_MAGIC=/usr/local/opt/hets/lib/hets.magic
 export HETS_OWL_TOOLS=/usr/local/opt/hets/lib/hets-owl-tools
 export HETS_APROVE=$HETS_OWL_TOOLS/AProVE.jar
 export HETS_ONTODMU=$HETS_OWL_TOOLS/OntoDMU.jar
