@@ -29,7 +29,7 @@ class HetsDependencies < Formula
       HTTP
       haskeline
       HaXml
-      hexpat
+      hexpat-0.20.6
       uni-uDrawGraph
       parsec1
       wai-extra-2.1.0.1
