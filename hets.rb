@@ -4,8 +4,8 @@ require 'rexml/document'
 class Hets < Formula
   # Both the version and the sha1 need to be adjusted when a new
   # dmg-version of hets is released.
-  @@version_commit = '63e6c8f71f11c2ccf4ceddfd8c26be0fded42564'
-  @@version_unix_timestamp = '1414745166'
+  @@version_commit = 'fe60f8689c1e096a3088de3cf26263682750cd7f'
+  @@version_unix_timestamp = '1415898707'
   homepage "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm"
   head "https://github.com/spechub/Hets.git", :using => :git
   url "https://github.com/spechub/Hets.git", :using => :git, :revision => @@version_commit
