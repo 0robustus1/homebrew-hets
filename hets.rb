@@ -54,7 +54,12 @@ class Hets < Formula
     owl_tools.install('DMU/OntoDMU.jar')
     owl_tools.install('CASL/Termination/AProVE.jar')
     owl_tools.join('lib').mkpath
-    owl_tools.join('lib').install('OWL2/lib/owl2api-bin.jar')
+    owl_api_jars = %w(lib/owlapi-osgidistribution-3.5.2.jar
+                      lib/guava-18.0.jar
+                      lib/trove4j-3.0.3.jar)
+    owl_api_jars.each do |jar|
+      owl_tools.join('lib').install("OWL2/#{jar}")
+    end
 
     local_lib.install('magic/hets.magic')
 
