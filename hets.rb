@@ -4,8 +4,8 @@ require 'rexml/document'
 class Hets < Formula
   # Both the version and the sha1 need to be adjusted when a new
   # dmg-version of hets is released.
-  @@version_commit = '5a803b916c9a97dd3336ecca616a3871e850fa97'
-  @@version_unix_timestamp = '1425553232'
+  @@version_commit = '928a719617b924a7e78e788141fdf2b4e18481f2'
+  @@version_unix_timestamp = '1430921534'
   homepage "http://www.informatik.uni-bremen.de/agbkb/forschung/formal_methods/CoFI/hets/index_e.htm"
   head "https://github.com/spechub/Hets.git", :using => :git
   url "https://github.com/spechub/Hets.git", :using => :git, :revision => @@version_commit
@@ -16,7 +16,7 @@ class Hets < Formula
   depends_on 'hets-lib'
   depends_on 'pellet'
   depends_on 'ant'
-  depends_on 'uDrawGraph'
+  depends_on 'udrawgraph'
   depends_on 'darwin'
   depends_on 'spass'
   depends_on 'graphviz'
@@ -54,7 +54,12 @@ class Hets < Formula
     owl_tools.install('DMU/OntoDMU.jar')
     owl_tools.install('CASL/Termination/AProVE.jar')
     owl_tools.join('lib').mkpath
-    owl_tools.join('lib').install('OWL2/lib/owl2api-bin.jar')
+    owl_api_jars = %w(lib/owlapi-osgidistribution-3.5.2.jar
+                      lib/guava-18.0.jar
+                      lib/trove4j-3.0.3.jar)
+    owl_api_jars.each do |jar|
+      owl_tools.join('lib').install("OWL2/#{jar}")
+    end
 
     local_lib.install('magic/hets.magic')
 
