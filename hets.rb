@@ -16,7 +16,7 @@ class Hets < Formula
   depends_on 'hets-lib'
   depends_on 'pellet'
   depends_on 'ant'
-  depends_on 'uDrawGraph'
+  depends_on 'udrawgraph'
   depends_on 'darwin'
   depends_on 'spass'
   depends_on 'graphviz'
