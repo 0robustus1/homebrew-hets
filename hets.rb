@@ -18,6 +18,7 @@ class Hets < Formula
   depends_on 'ant'
   depends_on 'udrawgraph'
   depends_on 'darwin'
+  depends_on 'eprover'
   depends_on 'spass'
   depends_on 'graphviz'
 
